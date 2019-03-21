@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hask.pc.haskmusic.activity.BaseActivity;
 import com.hask.pc.haskmusic.util.Consts;
 
 /**
@@ -34,6 +35,10 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
+    protected void initDatas() {
+
+    }
+
     @Override
     public void onResume() {
 
@@ -50,6 +55,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         initViews();
         initStyles();
+        initDatas();
         initListener();
         super.onViewCreated(view, savedInstanceState);
     }
@@ -78,6 +84,9 @@ public abstract class BaseFragment extends Fragment {
         startActivity(intent);
     }
 
+    public BaseActivity getMainActivity() {
+        return (BaseActivity) getActivity();
+    }
 
     protected abstract View getLayoutView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 

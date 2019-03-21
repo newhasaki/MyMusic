@@ -27,7 +27,8 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:background="@drawable/selector_button_reverse"
-            android:textColor="@drawable/selector_text_reverse"/>
+            android:textColor="@drawable/selector_text_reverse"
+            />
 
         <View
             android:layout_width="0dp"
@@ -38,10 +39,11 @@
             android:text="立即体验"
             android:onClick="bt_enter"
             android:id="@+id/bt_enter"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
+            android:layout_width="133dp"
+            android:layout_height="40dp"
             android:background="@drawable/selector_button"
-            android:textColor="@drawable/selector_text"/>
+            android:textColor="@drawable/selector_text"
+            />
 
         <View
             android:layout_width="0dp"

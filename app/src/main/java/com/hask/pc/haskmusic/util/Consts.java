@@ -5,5 +5,6 @@ package com.hask.pc.haskmusic.util;
  */
 
 public class Consts {
+    public static final String STRING = "STRING";
     public static String ID = "ID";
 }
