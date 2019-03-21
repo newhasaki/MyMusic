@@ -10,14 +10,14 @@ import com.hask.pc.haskmusic.R;
 import com.hask.pc.haskmusic.adapter.GuideAdapter;
 
 import java.util.ArrayList;
-;
+;import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by abc on 2019/3/17.
  */
 
 public class GuideActivity extends BaseCommonActivity {
-
+    private CircleIndicator circleIndicator;
     private GuideAdapter adapter;
     public ViewPager vp;
 
@@ -39,13 +39,21 @@ public class GuideActivity extends BaseCommonActivity {
     @Override
     protected void initDatas() {
         super.initDatas();
-        vp = findViewById(R.id.vp);
         adapter = new GuideAdapter(getActivity(),getSupportFragmentManager());
+        vp = findViewById(R.id.vp);
+        circleIndicator =findViewById(R.id.indicator);
+
+        vp.setAdapter(adapter);
+
+        circleIndicator.setViewPager(vp);
+        adapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
+
+
         ArrayList<Integer> datas = new ArrayList<>();
         datas.add(R.drawable.guide1);
         datas.add(R.drawable.guide2);
         datas.add(R.drawable.guide3);
         adapter.setDatas(datas);
-        vp.setAdapter(adapter);
+
     }
 }

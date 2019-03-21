@@ -37,6 +37,7 @@ public abstract class BaseFragmentPagerAdapter<T> extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
+
         return datas.size();
     }
 }
