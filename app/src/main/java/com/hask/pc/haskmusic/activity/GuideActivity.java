@@ -1,13 +1,18 @@
 package com.hask.pc.haskmusic.activity;
 
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.hask.pc.haskmusic.MainActivity;
 import com.hask.pc.haskmusic.R;
 import com.hask.pc.haskmusic.adapter.GuideAdapter;
+
+import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
 ;import me.relex.circleindicator.CircleIndicator;
@@ -21,14 +26,24 @@ public class GuideActivity extends BaseCommonActivity {
     private GuideAdapter adapter;
     public ViewPager vp;
 
+    private Button bt_login_or_register;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_guide);
 
+        Connector.getDatabase();
+
+        bt_login_or_register = (Button)findViewById(R.id.bt_login_or_register);
+        bt_login_or_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(LoginActivity.class);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -43,11 +58,9 @@ public class GuideActivity extends BaseCommonActivity {
         vp = findViewById(R.id.vp);
         circleIndicator =findViewById(R.id.indicator);
 
-        vp.setAdapter(adapter);
-
-        circleIndicator.setViewPager(vp);
         adapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
-
+        vp.setAdapter(adapter);
+        circleIndicator.setViewPager(vp);
 
         ArrayList<Integer> datas = new ArrayList<>();
         datas.add(R.drawable.guide1);
