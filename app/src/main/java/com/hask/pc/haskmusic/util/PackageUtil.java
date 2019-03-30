@@ -28,4 +28,14 @@ public class PackageUtil {
         }
         return null;
     }
+
+    public static int getVersionCode(Context context){
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            return packageManager.getPackageInfo(context.getPackageName(),0).versionCode;
+        }catch (PackageManager.NameNotFoundException e){
+            e.printStackTrace();
+        }
+        return  -1;
+    }
 }

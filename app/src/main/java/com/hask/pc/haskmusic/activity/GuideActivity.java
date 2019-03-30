@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.hask.pc.haskmusic.MainActivity;
 import com.hask.pc.haskmusic.R;
 import com.hask.pc.haskmusic.adapter.GuideAdapter;
+import com.hask.pc.haskmusic.util.PackageUtil;
 
 import org.litepal.tablemanager.Connector;
 
@@ -40,10 +41,15 @@ public class GuideActivity extends BaseCommonActivity {
         bt_login_or_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setFirst();
                 startActivity(LoginActivity.class);
                 finish();
             }
         });
+    }
+
+    private void setFirst(){
+        sp.putBoolean(String.valueOf(PackageUtil.getVersionCode(getApplicationContext())),false);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.hask.pc.haskmusic.domain;
 
+import android.print.PrinterId;
+
 public class User extends Base{
 
     public static  int TYPE_PHONE = 0;
@@ -9,6 +11,7 @@ public class User extends Base{
     private String nickname;
     private String phone;
     private String password;
+    private String usertoken;
     private int type;
 
 
@@ -44,4 +47,11 @@ public class User extends Base{
         return this.type;
     }
 
+    public void setUsertoken(String usertoken){
+        this.usertoken = usertoken;
+    }
+
+    public String getUsertoken(){
+        return this.usertoken;
+    }
 }

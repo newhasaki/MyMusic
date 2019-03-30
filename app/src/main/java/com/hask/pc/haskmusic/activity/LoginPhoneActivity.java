@@ -1,5 +1,6 @@
 package com.hask.pc.haskmusic.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,12 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hask.pc.haskmusic.MainActivity;
 import com.hask.pc.haskmusic.R;
+import com.hask.pc.haskmusic.domain.Message;
 import com.hask.pc.haskmusic.domain.User;
 
 import org.apache.commons.lang3.StringUtils;
+import org.greenrobot.eventbus.EventBus;
 import org.litepal.LitePal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginPhoneActivity extends BaseTitleActivity {
@@ -74,16 +79,34 @@ public class LoginPhoneActivity extends BaseTitleActivity {
             Toast.makeText(this, "密码格式错误", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        if(isPhoneInSqlite(phone)&&isPasswordInSqlite(passwd)){
+        String nickName = isCheckInSqliteReturnName(phone,passwd);
+        if(!nickName.isEmpty()){
             Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
-            startActivity(StartPlayActivity.class);
+//            Intent intent = new Intent();
+//            intent.putExtra("nickname",nickName);
+//            intent.setClass(LoginPhoneActivity.this,MainActivity.class);
+            EventBus.getDefault().post(new Message());
+            String token = String.valueOf(nickName.hashCode());
+            sp.setUserToken(token);
+            startActivity(MainActivity.class);
             finish();
             //跳转播放界面
         }else{
             Toast.makeText(this, "手机号或者密码错误", Toast.LENGTH_SHORT).show();
             return;
         }
+    }
+
+
+    private String isCheckInSqliteReturnName(String phone,String password){
+        String hashphone = String.valueOf(phone.hashCode());
+        String hashpassword =  String.valueOf(password.hashCode());
+
+        List<User> userList = LitePal.where("phone = ? and password = ?",hashphone,hashpassword).find(User.class);
+        if (userList.isEmpty()){
+            return null;
+        }
+        return userList.get(0).getNickname();
     }
 
 

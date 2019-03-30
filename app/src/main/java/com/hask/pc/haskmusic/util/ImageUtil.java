@@ -24,4 +24,10 @@ public class ImageUtil {
         //options.diskCacheStrategy(DiskCacheStrategy.NONE);
         return options;
     }
+
+    public static void showCircle(Activity activity, ImageView view, String name) {
+        RequestOptions options = getCommentRequestOptions();
+        options.circleCrop();
+        Glide.with(activity).load(name).apply(options).into(view);
+    }
 }

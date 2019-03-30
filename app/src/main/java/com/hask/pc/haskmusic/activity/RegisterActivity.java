@@ -17,6 +17,7 @@ import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
 import org.litepal.crud.LitePalSupport;
 
+import com.hask.pc.haskmusic.MainActivity;
 import com.hask.pc.haskmusic.R;
 import com.hask.pc.haskmusic.domain.Message;
 import com.hask.pc.haskmusic.domain.User;
@@ -99,21 +100,30 @@ public class RegisterActivity extends BaseTitleActivity {
                 return;
             }
 
+            String token = String.valueOf((phone + passwd).hashCode());
+
+
+            //保存用户信息到数据库
             User user = new User();
             user.setNickname(nickName);
             user.setPhone(encryptinInfo(phone));
             user.setPassword(encryptinInfo(passwd));
+            user.setUsertoken(token);
             user.setType(User.TYPE_PHONE);
             user.save();
 
-        Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+            //在共享参数中存token
+            sp.setUserToken(token);
 
-        //关闭主登陆界面
-        EventBus.getDefault().post(new Message());
+            Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
 
-        startActivity(StartPlayActivity.class);
-        //跳转播放主界面
-        finish();
+            //关闭主登陆界面
+            EventBus.getDefault().post(new Message());
+
+
+            startActivity(MainActivity.class);
+            //跳转播放主界面
+            finish();
     }
 
     private String encryptinInfo(String info){

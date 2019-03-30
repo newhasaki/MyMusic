@@ -24,7 +24,7 @@
 
         >
         <activity android:name=".activity.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
             <intent-filter>
@@ -50,6 +50,17 @@
         <activity android:name=".activity.StartPlayActivity"
             android:theme="@style/AppTheme.NoActionBar"
             ></activity>
+        <activity android:name=".MainActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+        </activity>
+
+        <activity android:name=".activity.SettingActivity"
+            android:label="设置"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+        </activity>
 
     </application>
 
